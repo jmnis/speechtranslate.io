@@ -4,9 +4,54 @@
     <title>ADNI: dispositif de traduction en temps réeel</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
+    <link rel="stylesheet" href="style/home.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 <body>
-    <div class="src-lang">
+    <div class="app-container">
+        <div class="captions-container">
+            <p id="captions">This the test, This the testThivnerjkfbnjerbverbqvbewbqkvjbvebks the testThis the testThis the testThis the testThis the testThis the testThis the testThis the testThis the testThis the testThis the testThis the testThis the testThis the testThis the test.<p>
+        </div>
+        <div id = "toolbar-container" data-closable>
+            <div class="bottom-bar">
+                <div class="language">
+                    <select id="from-language"; style= "background:#ffffff6f;border: none; color: #ffff; border-radius:4px; max-width: 90%;">
+                        <option value="no_filter">Langue de départ</option>
+                        <option value="fr-FR">Français</option>
+                        <option value="en-US">Anglais</option>
+                        <option value="es-ES">Espagnol</option>
+                        <option value="de-DE">Allemand</option>
+                        <option value="it-IT">Italien</option>
+                        <option value="pt-PT">Portugais</option>
+                        <option value="nl-NL">Néerlandais</option>
+                        <option value="ru-RU">Russe</option>
+                        <option value="zh-CN">Chinois</option>
+                        <option value="ja-JP">Japonais</option>
+                        <option value="ko-KR">Coréen</option>
+                    </select>
+                </div>
+                <div class="mic-button">
+                    <button id="recording"><i class="fa fa-microphone"; style="font-size: 40px;"></i></button>
+                </div>
+                <div class="language">
+                    <select id="to-language"; style= "background:#ffffff6f;border: none; color: #ffff; border-radius:4px; max-width: 90%;">
+                        <option value="no_filter">Langue d'arrivée </option>
+                        <option value="en-US">Anglais</option>
+                        <option value="es-ES">Espagnol</option>
+                        <option value="de-DE">Allemand</option>
+                        <option value="it-IT">Italien</option>
+                        <option value="pt-PT">Portugais</option>
+                        <option value="nl-NL">Néerlandais</option>
+                        <option value="ru-RU">Russe</option>
+                        <option value="zh-CN">Chinois</option>
+                        <option value="ja-JP">Japonais</option>
+                        <option value="ko-KR">Coréen</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+    </div>
+  <!-- Speech SDK reference sdk. -->
+  <script src="https://aka.ms/csspeech/jsbrowserpackageraw"></script>
 </body>
 </html>
