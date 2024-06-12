@@ -44,8 +44,8 @@ document.addEventListener("DOMContentLoaded", function () {
     var translator = new Translator();
 
     // subscription key and region for speech services.
-    const subscriptionKey = '1d17423e37354ae5816e931b166ea677';
-    const serviceRegion = 'westeurope';
+    const subscriptionKey = "YOUR_SUBSCRIPTION_KEY";
+    const serviceRegion = "YOUR_SERVICE_REGION";
 
     // To add in case of another language
     // const fromLanguageBar = document.getElementById("from-language");
