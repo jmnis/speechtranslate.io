@@ -44,7 +44,7 @@ document.addEventListener("DOMContentLoaded", function () {
     var translator = new Translator();
 
     // subscription key and region for speech services.
-    const subscriptionKey = process.secrets.SUBSCRIPTION_KEY;
+    const API_KEY = "123flda0";
     const serviceRegion = "YOUR_SERVICE_REGION";
 
     // To add in case of another language
