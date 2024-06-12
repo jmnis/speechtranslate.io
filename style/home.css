@@ -14,23 +14,20 @@ html, body{
 /* App container */
 #app-container{
     position: relative;
+    min-width: 400px;
     width: 100%;
     height: 100%;
     margin: auto;
+    /*margin: auto;*/
 }
-/*Toolbar container*/
-#toolbar-container{
-    width: 100%;
-    position: fixed;
-    bottom: 0;
-}
+
 /*Caption container */
-.captions-container{
+#captions-container{
     position: relative;
-    top: 50% !important;
-    margin-top: px !important;
-    width: 1000px !important;
-    height: 530px !important;
+    top: 10% /*!important*/;
+    margin-top: px /*!important*/;
+    width: 1000px /*!important*/;
+    height: 540px /*!important*/;
     margin: auto;
     padding: px;
     overflow-y: clip;
@@ -38,60 +35,68 @@ html, body{
     overflow-wrap: break-word;
     color: #ffffff;
     font-size: 94px;
-    text-align: justify;
+    text-align: left;
     white-space: normal;
 }
-
-/* Bottom bar */
-.bottom-bar{
-    position: relative;
-    width: 50%;
-    padding: 25px;
-    background-color: #051e5c;
-    white-space: nowrap;
+/* Language bar */
+.language-bar{
+    position: fixed;
+    top:0px;
+    left: 10px;
+    padding: 10px;
+    bottom:auto;
+    width: 13%;
+    height: 50px; /*Couleur de base: #051e5c*/ /*Transparent: #051e5c00*/
     margin: auto;
-    padding-left: 30px;
-    border-radius: 25px 25px 0 0;
-}
-
-/*Mic button*/
-.mic-button{
-    position: relative;
-    white-space: nowrap;
-    width: 80px;
-    height: 80px;
-    border-radius: 50%;
-    left: 45%;
+    border-radius: 6px;
     
 }
-
-#recording{
-    border-radius: 50%;
-    width: 80px;
-    height: 80px;
-    background-color: #ffffff;
-    border: none;
-}
-#recording:hover{
-    animation: blink 1s infinite;
-}
-
-/* Language selector */
-.language{
+.language-label{
     position: relative;
+    margin-top: 15px;
     width: 200px;
     height: 20px;
 }
+
+
+
+.rec-button{
+    position: fixed;
+    left: 98.6%;
+    width: 20px;
+    height: 20px;
+    top:  97.5%;
+    border-radius: 50px;
+    background-color: #7c0505; /*#7c0505*/
+    
+}
+
+
 /* Animation */
 
 @keyframes blink {
+    0% {
+        background-color: #7c050580; /*#fcfdff78*/
+    }
+
+    25% {
+        background-color: #7c05056a; /*#fcfdff78*/
+    }
+
     50% {
-        background-color: #fcfdff78;
+        background-color: #7c050540;
+    }
+
+    75% {
+        background-color: #7c050520;
+    }
+
+    100% {
+        background-color: #7c050500; /*#fcfdff78*/
     }
 }
-
-.fa-microphone{
-    color: #093cbdc5;
+.blink {
+    animation: blink 1s infinite;
 }
 
 
