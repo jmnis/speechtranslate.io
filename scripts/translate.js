@@ -39,16 +39,22 @@ class Translator {
 document.addEventListener("DOMContentLoaded", function () {
     // HTML elements
     var captionsDiv;
+    var subscriptionKeyElement;
     var recordingButton;
     var languageBar;
     var translator = new Translator();
 
     // subscription key and region for speech services.
-    // Use the subscription key from Github Secrets
-    const subscriptionKey = process.env.SUBSCRIPTION_KEY;
-    // Use the region from Github Secrets
-    const serviceRegion = process.env.SERVICE_REGION;
+    var subscriptionKey;
+    var serviceRegion;
 
+    subscriptionKeyElement = document.getElementById("key");
+    regionElement = document.getElementById("region");
+    
+    serviceRegion = regionElement.value;
+    subscriptionKeyElement.addEventListener("change", (event) => {
+        subscriptionKey = event.target.value;
+    })
     // To add in case of another language
     // const fromLanguageBar = document.getElementById("from-language");
     const toLanguageBar = document.getElementById("to-language");
@@ -74,7 +80,8 @@ document.addEventListener("DOMContentLoaded", function () {
         if (event.ctrlKey && event.key === 'r'){
             event.preventDefault();
             if (!translator._alreadyStarted) {
-                languageBar.style.opacity = 0;
+                languageBar.style.display = "none";
+                subscriptionKeyElement.style.display = "none";
                 recordingButton.classList.toggle("blink")
                 captionsDiv.innerHTML = "";
                 translator.start({
@@ -87,8 +94,10 @@ document.addEventListener("DOMContentLoaded", function () {
             } else {
                 translator.stop();
                 captionsDiv.innerHTML = "";
+                subscriptionKeyElement.value = "";
                 recordingButton.classList.toggle("blink")
-                languageBar.style.opacity = 1;
+                languageBar.style.display = "block";
+                subscriptionKeyElement.style.display = "block";
                 
             }
         }

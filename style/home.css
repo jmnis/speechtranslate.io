@@ -57,8 +57,32 @@ html, body{
     width: 200px;
     height: 20px;
 }
+/*Subscription panel*/
+.subscription-panel{
+    position: fixed;
+    top:20px;
+    right: 0px;
+    padding: 10px;
+    padding-left: 100px;
+    bottom:auto;
+    width: 13%;
+    height: 50px; /*Couleur de base: #051e5c*/ /*Transparent: #051e5c00*/
+    margin: auto;
+    border-radius: 6px;
+    
+}
 
+#key{
+    margin-bottom: 15px;
+    width: 85%;
+}
 
+#region{
+    width: 85%;
+}
+::placeholder {
+    color: #ffffff80;
+}
 
 .rec-button{
     position: fixed;
