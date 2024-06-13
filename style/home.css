@@ -26,7 +26,8 @@ html, body{
 #captions-container{
     position: relative;
     top: 20% ;
-    margin-top: px ;
+    margin-top: 15px ;
+    margin-bottom: 15px;
     max-height: 100%;
     width: 1000px;
     height: 460px;
@@ -35,8 +36,7 @@ html, body{
     overflow: hidden;
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    overflow-y: auto;
+    justify-content: space-evenly;
     overflow-wrap: break-word;
     color: #ffffff;
     font-size: 100px;
