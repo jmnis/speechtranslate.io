@@ -7,6 +7,7 @@ html, body{
     margin: 0;
     padding: 0;
     font-family: "Gill Sans", sans-serif;
+    color: #ffffff;
     overflow: hidden !important;
     background-color: #000;
 }
@@ -21,23 +22,29 @@ html, body{
     /*margin: auto;*/
 }
 
-/*Caption container */
+/*Caption container*/ 
 #captions-container{
     position: relative;
-    top: 10% /*!important*/;
-    margin-top: px /*!important*/;
-    width: 1000px /*!important*/;
-    height: 540px /*!important*/;
+    top: 20% ;
+    margin-top: px ;
+    max-height: 100%;
+    width: 1000px;
+    height: 460px;
     margin: auto;
     padding: px;
-    overflow-y: clip;
-    overflow-x: clip;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    overflow-y: auto;
     overflow-wrap: break-word;
     color: #ffffff;
-    font-size: 94px;
+    font-size: 100px;
     text-align: left;
     white-space: normal;
 }
+
+
 /* Language bar */
 .language-bar{
     position: fixed;

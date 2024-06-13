@@ -14,10 +14,12 @@ class Translator {
         this._translationRecognizer.startContinuousRecognitionAsync();
 
         this._translationRecognizer.recognizing = this._translationRecognizer.recognized = recognizerCallback.bind(this)
-
+        
         function recognizerCallback(s, e) {
-            options.captions.textContent = e.result.translations.get(options.toLanguage);
+            options.captions.innerHTML = e.result.translations.get(options.toLanguage);
         }
+        
+       
     }
 
     stop() {
@@ -36,6 +38,7 @@ class Translator {
         }
     }
 }
+
 document.addEventListener("DOMContentLoaded", function () {
     // HTML elements
     var captionsDiv;
@@ -72,18 +75,18 @@ document.addEventListener("DOMContentLoaded", function () {
     })
 
     recordingButton= document.getElementsByClassName("rec-button")[0];
-    captionsDiv = document.getElementById("captions");
+    captionsDiv = document.getElementById("captions-container");
     languageBar = document.getElementsByClassName("language-bar")[0];
-    
+
     // Start/Stop the translation when pressing CTRL + R
     document.addEventListener("keydown", (event) => {
         if (event.ctrlKey && event.key === 'r'){
             event.preventDefault();
             if (!translator._alreadyStarted) {
+                captionsDiv.innerHTML = "";
                 languageBar.style.display = "none";
                 subscriptionKeyElement.style.display = "none";
                 recordingButton.classList.toggle("blink")
-                captionsDiv.innerHTML = "";
                 translator.start({
                     key: subscriptionKey,
                     region: serviceRegion,
@@ -91,6 +94,7 @@ document.addEventListener("DOMContentLoaded", function () {
                     toLanguage: toLanguage,
                     captions: captionsDiv
                 });
+                
             } else {
                 translator.stop();
                 captionsDiv.innerHTML = "";
@@ -111,5 +115,4 @@ document.addEventListener("DOMContentLoaded", function () {
             document.documentElement.requestFullscreen();
         }
     });
-
 });
