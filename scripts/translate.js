@@ -2,7 +2,7 @@
 class Translator {
     _translationRecognizer
     _alreadyStarted = false
-
+    _phrases = []
     start(options) {
         this._alreadyStarted = true
 
@@ -11,12 +11,29 @@ class Translator {
         speechConfig.addTargetLanguage(options.toLanguage);
         const audioConfig = SpeechSDK.AudioConfig.fromDefaultMicrophoneInput();
         this._translationRecognizer = new SpeechSDK.TranslationRecognizer(speechConfig, audioConfig);
+        const phraseList = SpeechSDK.PhraseListGrammar.fromRecognizer(this._translationRecognizer);
+        // read the phrases from the file phrases.txt and add them to the phraseList
+        fetch("/scripts/phrases.txt")
+            .then(response => response.text())
+            .then(text => {
+                this._phrases = text.split("\n");
+                this._phrases = this._phrases.filter(phrase => phrase !== "");
+                this._phrases.forEach(phrase => {
+                    if (phrase === "") return;
+                    phraseList.addPhrase(phrase);
+                });
+            })
+            .catch(err => console.error(err));
+        console.log(phraseList);
+
         this._translationRecognizer.startContinuousRecognitionAsync();
 
         this._translationRecognizer.recognizing = this._translationRecognizer.recognized = recognizerCallback.bind(this)
         
         function recognizerCallback(s, e) {
+            console.log(e.result.text)
             options.captions.innerHTML = e.result.translations.get(options.toLanguage);
+            scrollToBottom(options.captions);
         }
         
        
@@ -39,6 +56,9 @@ class Translator {
     }
 }
 
+function scrollToBottom(element) {
+    element.scrollTop = element.scrollHeight;
+}
 document.addEventListener("DOMContentLoaded", function () {
     // HTML elements
     var captionsDiv;
@@ -83,6 +103,7 @@ document.addEventListener("DOMContentLoaded", function () {
         if (event.ctrlKey && event.key === 'r'){
             event.preventDefault();
             if (!translator._alreadyStarted) {
+                subscriptionKeyElement.value = "";
                 captionsDiv.innerHTML = "";
                 languageBar.style.display = "none";
                 subscriptionKeyElement.style.display = "none";
