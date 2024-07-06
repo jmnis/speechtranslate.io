@@ -13,7 +13,7 @@ class Translator {
         this._translationRecognizer = new SpeechSDK.TranslationRecognizer(speechConfig, audioConfig);
         const phraseList = SpeechSDK.PhraseListGrammar.fromRecognizer(this._translationRecognizer);
         // read the phrases from the file phrases.txt and add them to the phraseList
-        fetch("https://github.com/jmnis/adni.io/blob/main/scripts/phrases.txt")
+        fetch("/scripts/phrases.txt")
             .then(response => response.text())
             .then(text => {
                 this._phrases = text.split("\n");
