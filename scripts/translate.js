@@ -16,6 +16,7 @@ class Translator {
         fetch("/scripts/phrases.txt")
             .then(response => response.text())
             .then(text => {
+                console.log(text);
                 this._phrases = text.split("\n");
                 this._phrases = this._phrases.filter(phrase => phrase !== "");
                 this._phrases.forEach(phrase => {
