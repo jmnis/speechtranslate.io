@@ -34,6 +34,7 @@ class Translator {
         this._translationRecognizer.recognizing = this._translationRecognizer.recognized = recognizerCallback.bind(this)
         
         function recognizerCallback(s, e) {
+            // Debugging purposes
             console.log(e.result)
             if (e.result.text) {
                 options.captions.innerHTML = e.result.translations.get(options.toLanguage);
