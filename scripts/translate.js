@@ -9,6 +9,7 @@ class Translator {
         const speechConfig = SpeechSDK.SpeechTranslationConfig.fromSubscription(options.key, options.region);
         speechConfig.speechRecognitionLanguage = options.fromLanguage;
         speechConfig.setProfanity(SpeechSDK.ProfanityOption.Raw);
+        speechConfig.setProperty(SpeechSDK.PropertyId.SpeechServiceConnection_EndSilenceTimeoutMs, "2500")
         speechConfig.addTargetLanguage(options.toLanguage);
         const audioConfig = SpeechSDK.AudioConfig.fromDefaultMicrophoneInput();
         this._translationRecognizer = new SpeechSDK.TranslationRecognizer(speechConfig, audioConfig);
@@ -33,9 +34,13 @@ class Translator {
         this._translationRecognizer.recognizing = this._translationRecognizer.recognized = recognizerCallback.bind(this)
         
         function recognizerCallback(s, e) {
-            console.log(e.result.text)
-            options.captions.innerHTML = e.result.translations.get(options.toLanguage);
-            scrollToBottom(options.captions);
+            console.log(e.result)
+            if (e.result.text) {
+                options.captions.innerHTML = e.result.translations.get(options.toLanguage);
+                scrollToBottom(options.captions);
+            } else {
+                options.captions.innerHTML = "";
+            }
         }
         
        
