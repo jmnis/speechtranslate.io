@@ -14,11 +14,22 @@
 <body>
     <div id="app-container">
         <div id="captions-container">
+            Dispositif de traduction en temps réel
         </div>
         <div class="subscription-panel">
             <tr>
                 <input id="key" type="text" pattern="[0-9a-zA-Z]" placeholder="Clé de souscription" style= "background:#ffffff6f;border: none; color: #ffff; border-radius:4px; max-width: 90%;">
             </tr>
+            <!--- add a range to modify captions font size
+            -->
+            <div id="range-slider">
+                <span id="range-value">Font size</span>
+                <input class="range-slider__range" id="captions-font-size" type="range" value="100" min="25" max="200" step="1"> 
+            </div>
+            <div id="color-slider"></div>
+                <span id="range-value">Color</span>
+                <input class="range-slider__range" id="color-font" type="range" value="100" min="0" max="360" step="1"> 
+            </div>
             <div class="subscription-region">
                 <select id="region"; style= "background:#ffffff6f;border: none; color: #ffff; border-radius:4px; max-width: 90%;"hidden>
                     <option value="westeurope" selected disabled>Région</option>

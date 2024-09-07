@@ -69,6 +69,7 @@ document.addEventListener("DOMContentLoaded", function () {
     // HTML elements
     var captionsDiv;
     var subscriptionKeyElement;
+    var rangeSlider;
     var recordingButton;
     var languageBar;
     var translator = new Translator();
@@ -101,6 +102,7 @@ document.addEventListener("DOMContentLoaded", function () {
     })
 
     recordingButton= document.getElementsByClassName("rec-button")[0];
+    rangeSlider = document.getElementById("range-slider");
     captionsDiv = document.getElementById("captions-container");
     languageBar = document.getElementsByClassName("language-bar")[0];
 
@@ -117,6 +119,7 @@ document.addEventListener("DOMContentLoaded", function () {
                     captionsDiv.innerHTML = "";
                     languageBar.style.display = "none";
                     subscriptionKeyElement.style.display = "none";
+                    rangeSlider.style.display = "none";
                     recordingButton.classList.toggle("blink")
                     translator.start({
                         key: subscriptionKey,
@@ -128,10 +131,11 @@ document.addEventListener("DOMContentLoaded", function () {
                     
                 } else {
                     translator.stop();
-                    captionsDiv.innerHTML = "";
+                    captionsDiv.innerHTML = "Dispositif de traduction en temps réel";
                     subscriptionKeyElement.value = "";
                     recordingButton.classList.toggle("blink")
                     languageBar.style.display = "block";
+                    rangeSlider.style.display = "block";
                     subscriptionKeyElement.style.display = "block";
                     
                 }
@@ -146,5 +150,18 @@ document.addEventListener("DOMContentLoaded", function () {
             event.preventDefault();
             document.documentElement.requestFullscreen();
         }
+    });
+
+    // Adapt the font size with the slider value
+    const fontSizeSlider = document.getElementById("captions-font-size");
+    fontSizeSlider.addEventListener("change", (event) => {
+        captionsDiv.style.fontSize = event.target.value + "px";
+    });
+
+    // Adapt the color font with the slider value
+    // The color is in hexadecimal
+    const colorFontSlider = document.getElementById("color-font");
+    colorFontSlider.addEventListener("change", (event) => {
+        captionsDiv.style.color = `hsl(${event.target.value}, 100%, 50%)` ;
     });
 });
