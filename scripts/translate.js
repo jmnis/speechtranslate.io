@@ -35,6 +35,7 @@ class Translator {
             // If the result is empty, we flush the captions
             console.log(e.result.text)
             if (!e.result.text) {
+                
                 options.captions.innerHTML = "";
             } else {
                 options.captions.innerHTML = e.result.translations.get(options.toLanguage);
