@@ -8,6 +8,7 @@ class Translator {
 
         const speechConfig = SpeechSDK.SpeechTranslationConfig.fromSubscription(options.key, options.region);
         speechConfig.speechRecognitionLanguage = options.fromLanguage;
+        speechConfig.setProfanity(SpeechSDK.ProfanityOption.Raw);
         speechConfig.addTargetLanguage(options.toLanguage);
         const audioConfig = SpeechSDK.AudioConfig.fromDefaultMicrophoneInput();
         this._translationRecognizer = new SpeechSDK.TranslationRecognizer(speechConfig, audioConfig);
@@ -16,7 +17,6 @@ class Translator {
         fetch("/scripts/phrases.txt")
             .then(response => response.text())
             .then(text => {
-                console.log(text);
                 this._phrases = text.split("\n");
                 this._phrases = this._phrases.filter(phrase => phrase !== "");
                 this._phrases.forEach(phrase => {
@@ -32,9 +32,15 @@ class Translator {
         this._translationRecognizer.recognizing = this._translationRecognizer.recognized = recognizerCallback.bind(this)
         
         function recognizerCallback(s, e) {
+            // If the result is empty, we flush the captions
             console.log(e.result.text)
-            options.captions.innerHTML = e.result.translations.get(options.toLanguage);
-            scrollToBottom(options.captions);
+            if (!e.result.text) {
+                options.captions.innerHTML = "";
+                return;
+            } else {
+                options.captions.innerHTML = e.result.translations.get(options.toLanguage);
+                scrollToBottom(options.captions);
+            }          
         }
         
        
@@ -100,9 +106,11 @@ document.addEventListener("DOMContentLoaded", function () {
     languageBar = document.getElementsByClassName("language-bar")[0];
 
     // Start/Stop the translation when pressing CTRL + R
-    document.addEventListener("keydown", (event) => {
-        if (event.ctrlKey && event.key === 'r'){
-            event.preventDefault();
+    recordingButton.addEventListener("click", (event) => {
+        if (!subscriptionKey) {
+            alert("Veuillez rentrer la clö de souscription.");
+            return;
+        } else {
             if (!translator._alreadyStarted) {
                 subscriptionKeyElement.value = "";
                 captionsDiv.innerHTML = "";

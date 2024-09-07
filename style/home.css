@@ -100,6 +100,7 @@ html, body{
     width: 20px;
     height: 20px;
     top:  97.5%;
+    border: none;
     border-radius: 50px;
     background-color: #7c0505; /*#7c0505*/
     
