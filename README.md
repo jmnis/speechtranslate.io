@@ -1,5 +1,5 @@
 # adni.io
-Real-time translation engine
+Real-time translation engine powered by azure engine speech
 
 # Commands
 CTRL + R: Start/Stop recording
