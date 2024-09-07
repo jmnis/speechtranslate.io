@@ -70,6 +70,7 @@ document.addEventListener("DOMContentLoaded", function () {
     var captionsDiv;
     var subscriptionKeyElement;
     var rangeSlider;
+    var colorSlider;
     var recordingButton;
     var languageBar;
     var translator = new Translator();
@@ -103,6 +104,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     recordingButton= document.getElementsByClassName("rec-button")[0];
     rangeSlider = document.getElementById("range-slider");
+    colorSlider = document.getElementById("color-slider");
     captionsDiv = document.getElementById("captions-container");
     languageBar = document.getElementsByClassName("language-bar")[0];
 
@@ -120,6 +122,7 @@ document.addEventListener("DOMContentLoaded", function () {
                     languageBar.style.display = "none";
                     subscriptionKeyElement.style.display = "none";
                     rangeSlider.style.display = "none";
+                    colorSlider.style.display = "none";
                     recordingButton.classList.toggle("blink")
                     translator.start({
                         key: subscriptionKey,
@@ -136,6 +139,7 @@ document.addEventListener("DOMContentLoaded", function () {
                     recordingButton.classList.toggle("blink")
                     languageBar.style.display = "block";
                     rangeSlider.style.display = "block";
+                    colorSlider.style.display = "block";
                     subscriptionKeyElement.style.display = "block";
                     
                 }
