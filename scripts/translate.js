@@ -8,7 +8,7 @@ class Translator {
 
         const speechConfig = SpeechSDK.SpeechTranslationConfig.fromSubscription(options.key, options.region);
         speechConfig.speechRecognitionLanguage = options.fromLanguage;
-        speechConfig.setProfanity(SpeechSDK.ProfanityOption.Raw);
+        
         speechConfig.addTargetLanguage(options.toLanguage);
         const audioConfig = SpeechSDK.AudioConfig.fromDefaultMicrophoneInput();
         this._translationRecognizer = new SpeechSDK.TranslationRecognizer(speechConfig, audioConfig);
@@ -34,12 +34,13 @@ class Translator {
         function recognizerCallback(s, e) {
             // If the result is empty, we flush the captions
             console.log(e.result.text)
-            if (!e.result.text) {
+            options.captions.innerHTML = e.result.translations.get(options.toLanguage);
+            scrollToBottom(options.captions);
+            /*if (!e.result.text) {
                 options.captions.innerHTML = "";
             } else {
-                options.captions.innerHTML = e.result.translations.get(options.toLanguage);
-                scrollToBottom(options.captions);
-            }          
+                
+            }*/          
         }
         
        
@@ -107,7 +108,7 @@ document.addEventListener("DOMContentLoaded", function () {
     // Start/Stop the translation when pressing CTRL + R
     recordingButton.addEventListener("click", (event) => {
         if (!subscriptionKey) {
-            alert("Veuillez rentrer la clö de souscription.");
+            alert("Veuillez rentrer la clé de souscription.");
             return;
         } else {
             if (!translator._alreadyStarted) {
