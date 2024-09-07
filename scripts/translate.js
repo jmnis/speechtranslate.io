@@ -36,7 +36,6 @@ class Translator {
             console.log(e.result.text)
             if (!e.result.text) {
                 options.captions.innerHTML = "";
-                return;
             } else {
                 options.captions.innerHTML = e.result.translations.get(options.toLanguage);
                 scrollToBottom(options.captions);
