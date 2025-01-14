@@ -154,6 +154,7 @@ document.addEventListener("DOMContentLoaded", function () {
                     subscriptionKeyElement.value = "";
                     captionsDiv.innerHTML = "";
                     //languageBar.style.visibility = "hidden";
+                    resetButton.style.visibility = "hidden";
                     passwordBox.style.visibility = "hidden";
                     subscriptionKeyElement.style.visibility = "hidden";
                     rangeSlider.style.visibility = "hidden";
@@ -172,6 +173,7 @@ document.addEventListener("DOMContentLoaded", function () {
                     captionsDiv.innerHTML = "Real-time translator";
                     recordingButton.classList.toggle("blink")
                     //languageBar.style.visibility  = "visible";
+                    resetButton.style.visibility = "visible";
                     passwordBox.style.visibility = "visible";
                     rangeSlider.style.visibility  = "visible";
                     colorSlider.style.visibility  = "visible";
