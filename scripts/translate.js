@@ -133,7 +133,7 @@ document.addEventListener("DOMContentLoaded", function () {
                     toLanguage: targetLanguage,
                     captions: captionsDiv
                 });
-            },200);
+            },500);
         }
 
     });
