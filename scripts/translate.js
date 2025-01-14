@@ -56,6 +56,7 @@ class Translator {
         )
 
         function stopRecognizer() {
+            this._alreadyStarted = false
             this._translationRecognizer.close()
             this._translationRecognizer = undefined
         }
@@ -87,15 +88,15 @@ document.addEventListener("DOMContentLoaded", function () {
         subscriptionKey = event.target.value;
     })
     // To add in case of another language
-    // const fromLanguageBar = document.getElementById("from-language");
+    const fromLanguageBar = document.getElementById("from-language");
     const toLanguageBar = document.getElementById("to-language");
-    var fromLanguage = "fr-FR";
+    var fromLanguage = fromLanguageBar//"fr-FR";
     var toLanguage = toLanguageBar.value;
 
-    /*
+    // Update the language from which we translate
     fromLanguageBar.addEventListener("change", (event) => {
         fromLanguage = event.target.value;
-    } )*/
+    } )
 
     // Update the language to which we translate
     toLanguageBar.addEventListener("change", (event) => {
@@ -119,10 +120,10 @@ document.addEventListener("DOMContentLoaded", function () {
                 if (!translator._alreadyStarted) {
                     subscriptionKeyElement.value = "";
                     captionsDiv.innerHTML = "";
-                    languageBar.style.display = "none";
-                    subscriptionKeyElement.style.display = "none";
-                    rangeSlider.style.display = "none";
-                    colorSlider.style.display = "none";
+                    //languageBar.style.visibility = "hidden";
+                    subscriptionKeyElement.style.visibility = "hidden";
+                    rangeSlider.style.visibility = "hidden";
+                    colorSlider.style.visibility = "hidden";
                     recordingButton.classList.toggle("blink")
                     translator.start({
                         key: subscriptionKey,
@@ -137,10 +138,10 @@ document.addEventListener("DOMContentLoaded", function () {
                     captionsDiv.innerHTML = "Dispositif de traduction en temps réel";
                     subscriptionKeyElement.value = "";
                     recordingButton.classList.toggle("blink")
-                    languageBar.style.display = "block";
-                    rangeSlider.style.display = "block";
-                    colorSlider.style.display = "block";
-                    subscriptionKeyElement.style.display = "block";
+                    //languageBar.style.visibility  = "visible";
+                    rangeSlider.style.visibility  = "visible";
+                    colorSlider.style.visibility  = "visible";
+                    subscriptionKeyElement.style.visibility  = "visible";
                     
                 }
             }
