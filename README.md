@@ -8,4 +8,4 @@ CTRL + F: Enter full screen
 
 Esc: Exit full screen
 
-To access, visit: https://jmnis.github.io/adni.io/{:target="_blank"}
+To access, visit: [Click here to open in a new tab]( https://jmnis.github.io/adni.io/){:target="_blank"}
