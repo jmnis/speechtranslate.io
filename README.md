@@ -1,5 +1,5 @@
-# adni.io
-Real-time translation engine powered by azure engine speech
+# SpeechTranslate
+SpeechTranslate provides a real-time translation engine powered by azure engine speech. You will need a valid Microsoft Azure Subscription Key related to a Speech Service ressource. You can find details about how to create a Speech Service ressource and to generate a Microsoft Azure Subscription Key.
 
 # Commands
 CTRL + R: Start/Stop recording
@@ -49,3 +49,4 @@ Once the Speech service resource is created:
 2. In the left sidebar, click on **Keys and Endpoint**.
 3. Here, you'll find two subscription keys (Key 1 and Key 2) and the **Endpoint URL**. Copy either of the keys (usually Key 1) and the endpoint URL.
 
+# Demo
