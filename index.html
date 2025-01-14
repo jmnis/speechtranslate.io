@@ -9,7 +9,8 @@
     <script src="scripts/microsoft.cognitiveservices.speech.sdk.bundle.js"></script>
     <embed src="scripts/phrases.txt" id="phrases">
     <!-- Speech SDK reference sdk. -->
-    <script src="scripts/translate.js"></script>
+    <!--<script src="scripts/translate.js"></script>-->
+    <script src="https://cdn.jsdelivr.net/npm/microsoft-cognitiveservices-speech-sdk@latest"></script>
 </head>
 <body>
     <div id="app-container">
@@ -41,22 +42,13 @@
             </button> 
                 
         </div>
-            <div class="subscription-region">
-                <select id="region"; style= "background:#ffffff6f;border: none; color: #ffff; border-radius:4px; max-width: 90%;"hidden>
-                    <option value="westeurope" selected disabled>Région</option>
-                    <option value="westus">westus</option>
-                    <option value="eastus">eastus</option>
-                    <option value="westeurope">westeurope</option>
-                    <option value="southeastasia">southeastasia</option>
-                </select>
-            </div>
-        </div>
+            
         <div class="language-bar">
              <div class="language-label">
                 <select id="from-language"; style= "background:#ffffff6f;border: none; color: #ffff; border-radius:4px; max-width: 90%;">
-                    <option value="fr-FR" selected disabled>Source Language</option>
+                    <option value="" selected >Source Language</option>
                     <option value="en-US">English</option>
-                    <option value="fr-FR">French (Default)</option>
+                    <option value="fr-FR">French</option>
                     <option value="es">Spanish</option>
                     <option value="de">German</option>
                     <option value="el">Greek</option>
@@ -66,8 +58,8 @@
             </div>
             <div class="language-label">
                 <select id="to-language"; style= "background:#ffffff6f;border: none; color: #ffff; border-radius:4px; max-width: 90%;">
-                    <option value="en" selected disabled>Target Language</option>
-                    <option value="en">English (Default)</option>
+                    <option value="" selected >Target Language</option>
+                    <option value="en">English</option>
                     <option value="fr-FR">French</option>
                     <option value="es">Spanish</option>
                     <option value="de">German</option>
@@ -76,9 +68,19 @@
                     <option value="ar">Arabic</option>
                 </select>  
             </div>
+
+            <div class="subscription-region">
+                <select id="region"; style= "background:#ffffff6f;border: none; color: #ffff; border-radius:4px; max-width: 90%;">
+                    <option value="" selected>Region</option>
+                    <option value="westus">westus</option>
+                    <option value="eastus">eastus</option>
+                    <option value="westeurope">westeurope</option>
+                    <option value="southeastasia">southeastasia</option>
+                </select>
+            </div>
             
         </div>
-        <div class="rec-button">
+            <div class="rec-button">
         </div>
     </div>
 </body>

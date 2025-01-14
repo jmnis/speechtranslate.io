@@ -49,8 +49,8 @@ html, body{
 }*/
 #captions-container {
     position: absolute;
-    top: 40%;
-    left: 45%;
+    top: 30%;
+    left: 50%;
     transform: translate(-50% , -50%);
     scroll-padding-top: 150px;
     /* max-height: 100%; */
@@ -70,17 +70,17 @@ html, body{
     top:0px;
     left: 10px;
     padding: 10px;
-    bottom:auto;
-    width: 13%;
-    height: 50px; /*Couleur de base: #051e5c*/ /*Transparent: #051e5c00*/
-    margin: auto;
+    /*bottom:auto;*/
+    width: 140px;
+   /*height: px; Couleur de base: #051e5c*/ /*Transparent: #051e5c00*/
+    /*margin: auto;*/
     border-radius: 6px;
     
 }
 .language-label{
     position: relative;
-    margin-top: 15px;
-    width: 200px;
+    padding-top: 15px;
+    width: 140px;
     height: 20px;
 }
 
@@ -96,7 +96,11 @@ html, body{
     height: 100px; /*Couleur de base: #051e5c*/ /*Transparent: #051e5c00*/
     margin: auto;
     border-radius: 6px;
-    
+}
+
+.subscription-region{
+    padding-top: 15px;
+    width: 120px
 }
 
 .password_box{

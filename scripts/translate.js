@@ -34,18 +34,17 @@ class Translator {
         
         function recognizerCallback(s, e) {
             if (e.result.text) {
-                console.log(e.result.text)
                 options.captions.innerHTML = e.result.translations.get(options.toLanguage);
                 scrollToBottom(options.captions);
             } else {
                 options.captions.innerHTML = "";
             }
         }
-        
+        console.log(this._hasAlreadyStarted)
        
     }
 
-    stop() {
+    stop(options) {
         console.log("Ended")
         this._hasAlreadyStarted = false
         this._translationRecognizer.stopContinuousRecognitionAsync(
@@ -57,9 +56,10 @@ class Translator {
         )
 
         function stopRecognizer() {
-            this._hasAlreadyStarted = false
-            this._translationRecognizer.close()
-            this._translationRecognizer = undefined
+            this._hasAlreadyStarted = false;
+            this._translationRecognizer.close();
+            this._translationRecognizer = undefined;
+            options.captions.innerHTML = "Real-time translator";
         }
     }
 }
@@ -79,6 +79,7 @@ document.addEventListener("DOMContentLoaded", function () {
     var checkBox;
     var passwordBox;
     var resetButton;
+    var regionBar;
 
     // subscription key and region for speech services.
     var subscriptionKey;
@@ -103,18 +104,19 @@ document.addEventListener("DOMContentLoaded", function () {
         captionsDiv.style.fontSize = "100px";
         fontSizeSlider.value = fontSizeSlider.defaultValue;
         colorFontSlider.value = colorFontSlider.defaultValue;
-
     }
+
     serviceRegion = regionElement.value;
     subscriptionKeyElement.addEventListener("change", (event) => {
         subscriptionKey = event.target.value;
-    })
+    });
 
     // To add in case of another language
     const sourceLanguageBar = document.getElementById("from-language");
     const targetLanguageBar = document.getElementById("to-language");
     var sourceLanguage = sourceLanguageBar.value;//"fr-FR";
     var targetLanguage = targetLanguageBar.value;
+    var regionBar = document.getElementById("region");
 
     // Update the language from which we translate and
     // In case we already started a real-time translation session, we switch to another langage (Purpose of demonstration)
@@ -123,18 +125,27 @@ document.addEventListener("DOMContentLoaded", function () {
         if (translator._hasAlreadyStarted){
             console.log("Changed")
             translator.stop()
-            translator.start({
-                key: subscriptionKey,
-                region: serviceRegion,
-                fromLanguage: sourceLanguage,
-                toLanguage: event.target.value,
-                captions: captionsDiv
-            });
+            setTimeout(() => {
+                translator.start({
+                    key: subscriptionKey,
+                    region: serviceRegion,
+                    fromLanguage: sourceLanguage,
+                    toLanguage: targetLanguage,
+                    captions: captionsDiv
+                });
+            },200);
         }
 
-    } )
+    });
 
+    sourceLanguageBar.addEventListener("change", (event) => {
+        sourceLanguage = event.target.value;
+    });
 
+    regionBar.addEventListener("change", (event) => {
+        serviceRegion = event.target.value;
+    }
+    );
 
     recordingButton= document.getElementsByClassName("rec-button")[0];
     rangeSlider = document.getElementById("range-slider");
@@ -146,20 +157,33 @@ document.addEventListener("DOMContentLoaded", function () {
     document.addEventListener("keydown", (event) => {
         if (event.ctrlKey && event.key === 'r'){
             event.preventDefault();
-            if (!subscriptionKey) {
+            if(!sourceLanguageBar.value){
+                alert("Select source language.");
+                return;
+            } else if (!targetLanguageBar.value) {
+                alert("Select target language.");
+                return;
+            } else if (!regionBar.value) {
+                alert("Select region.");
+                return;
+            } else if (!subscriptionKey) {
                 alert("Enter subscription key.");
                 return;
             } else {
                 if (!translator._hasAlreadyStarted) {
+                    console.log("Concurency issue")
+                    console.log(serviceRegion)
                     subscriptionKeyElement.value = "";
                     captionsDiv.innerHTML = "";
                     //languageBar.style.visibility = "hidden";
+                    regionBar.style.visibility = "hidden";
                     resetButton.style.visibility = "hidden";
                     passwordBox.style.visibility = "hidden";
                     subscriptionKeyElement.style.visibility = "hidden";
                     rangeSlider.style.visibility = "hidden";
                     colorSlider.style.visibility = "hidden";
                     recordingButton.classList.toggle("blink")
+
                     // Update the language from which we translate
                     translator.start({
                         key: subscriptionKey,
@@ -169,10 +193,14 @@ document.addEventListener("DOMContentLoaded", function () {
                         captions: captionsDiv
                     });
                 } else {
-                    translator.stop();
-                    captionsDiv.innerHTML = "Real-time translator";
+                    translator.stop({captions: captionsDiv});
+                    // Reset the language and region to the default value
+                    sourceLanguageBar.value = sourceLanguageBar.defaultValue;  // Reset to default source language
+                    targetLanguageBar.value = targetLanguageBar.defaultValue;  // Reset to default target language
+                    regionBar.value = regionBar.defaultValue;
                     recordingButton.classList.toggle("blink")
                     //languageBar.style.visibility  = "visible";
+                    regionBar.style.visibility = "visible";
                     resetButton.style.visibility = "visible";
                     passwordBox.style.visibility = "visible";
                     rangeSlider.style.visibility  = "visible";
