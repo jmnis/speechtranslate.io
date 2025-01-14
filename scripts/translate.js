@@ -1,10 +1,11 @@
 // This class is used to translate the speech from the microphone to the desired language.
 class Translator {
     _translationRecognizer
-    _alreadyStarted = false
+    _hasAlreadyStarted = false
     _phrases = []
     start(options) {
-        this._alreadyStarted = true
+        console.log("Started")
+        this._hasAlreadyStarted = true
 
         const speechConfig = SpeechSDK.SpeechTranslationConfig.fromSubscription(options.key, options.region);
         speechConfig.speechRecognitionLanguage = options.fromLanguage;
@@ -18,7 +19,6 @@ class Translator {
         fetch("/scripts/phrases.txt")
             .then(response => response.text())
             .then(text => {
-                console.log(text);
                 this._phrases = text.split("\n");
                 this._phrases = this._phrases.filter(phrase => phrase !== "");
                 this._phrases.forEach(phrase => {
@@ -27,7 +27,6 @@ class Translator {
                 });
             })
             .catch(err => console.error(err));
-        console.log(phraseList);
 
         this._translationRecognizer.startContinuousRecognitionAsync();
 
@@ -35,6 +34,7 @@ class Translator {
         
         function recognizerCallback(s, e) {
             if (e.result.text) {
+                console.log(e.result.text)
                 options.captions.innerHTML = e.result.translations.get(options.toLanguage);
                 scrollToBottom(options.captions);
             } else {
@@ -46,7 +46,8 @@ class Translator {
     }
 
     stop() {
-        this._alreadyStarted = false
+        console.log("Ended")
+        this._hasAlreadyStarted = false
         this._translationRecognizer.stopContinuousRecognitionAsync(
             stopRecognizer.bind(this),
             function (err) {
@@ -56,7 +57,7 @@ class Translator {
         )
 
         function stopRecognizer() {
-            this._alreadyStarted = false
+            this._hasAlreadyStarted = false
             this._translationRecognizer.close()
             this._translationRecognizer = undefined
         }
@@ -75,6 +76,9 @@ document.addEventListener("DOMContentLoaded", function () {
     var recordingButton;
     var languageBar;
     var translator = new Translator();
+    var checkBox;
+    var passwordBox;
+    var resetButton;
 
     // subscription key and region for speech services.
     var subscriptionKey;
@@ -82,26 +86,55 @@ document.addEventListener("DOMContentLoaded", function () {
 
     subscriptionKeyElement = document.getElementById("key");
     regionElement = document.getElementById("region");
-    
+    checkBox = document.getElementById("show");
+    passwordBox = document.getElementsByClassName("password_box")[0];
+    resetButton = document.getElementsByClassName("reset_box")[0];
+
+    checkBox.onclick = function () {
+        if (checkBox.checked) {
+            subscriptionKeyElement.type = "text";
+        } else {
+            subscriptionKeyElement.type = "password";
+        }
+    }
+
+    resetButton.onclick = function () {
+        captionsDiv.style.color = "#ffffff";
+        captionsDiv.style.fontSize = "100px";
+        fontSizeSlider.value = fontSizeSlider.defaultValue;
+        colorFontSlider.value = colorFontSlider.defaultValue;
+
+    }
     serviceRegion = regionElement.value;
     subscriptionKeyElement.addEventListener("change", (event) => {
         subscriptionKey = event.target.value;
     })
-    // To add in case of another language
-    const fromLanguageBar = document.getElementById("from-language");
-    const toLanguageBar = document.getElementById("to-language");
-    var fromLanguage = fromLanguageBar//"fr-FR";
-    var toLanguage = toLanguageBar.value;
 
-    // Update the language from which we translate
-    fromLanguageBar.addEventListener("change", (event) => {
-        fromLanguage = event.target.value;
+    // To add in case of another language
+    const sourceLanguageBar = document.getElementById("from-language");
+    const targetLanguageBar = document.getElementById("to-language");
+    var sourceLanguage = sourceLanguageBar.value;//"fr-FR";
+    var targetLanguage = targetLanguageBar.value;
+
+    // Update the language from which we translate and
+    // In case we already started a real-time translation session, we switch to another langage (Purpose of demonstration)
+    targetLanguageBar.addEventListener("change", (event) => {
+        targetLanguage = event.target.value;
+        if (translator._hasAlreadyStarted){
+            console.log("Changed")
+            translator.stop()
+            translator.start({
+                key: subscriptionKey,
+                region: serviceRegion,
+                fromLanguage: sourceLanguage,
+                toLanguage: event.target.value,
+                captions: captionsDiv
+            });
+        }
+
     } )
 
-    // Update the language to which we translate
-    toLanguageBar.addEventListener("change", (event) => {
-        toLanguage = event.target.value;
-    })
+
 
     recordingButton= document.getElementsByClassName("rec-button")[0];
     rangeSlider = document.getElementById("range-slider");
@@ -114,31 +147,32 @@ document.addEventListener("DOMContentLoaded", function () {
         if (event.ctrlKey && event.key === 'r'){
             event.preventDefault();
             if (!subscriptionKey) {
-                alert("Veuillez rentrer la clé de souscription.");
+                alert("Enter subscription key.");
                 return;
             } else {
-                if (!translator._alreadyStarted) {
+                if (!translator._hasAlreadyStarted) {
                     subscriptionKeyElement.value = "";
                     captionsDiv.innerHTML = "";
                     //languageBar.style.visibility = "hidden";
+                    passwordBox.style.visibility = "hidden";
                     subscriptionKeyElement.style.visibility = "hidden";
                     rangeSlider.style.visibility = "hidden";
                     colorSlider.style.visibility = "hidden";
                     recordingButton.classList.toggle("blink")
+                    // Update the language from which we translate
                     translator.start({
                         key: subscriptionKey,
                         region: serviceRegion,
-                        fromLanguage: fromLanguage,
-                        toLanguage: toLanguage,
+                        fromLanguage: sourceLanguage,
+                        toLanguage: targetLanguage,
                         captions: captionsDiv
                     });
-                    
                 } else {
                     translator.stop();
-                    captionsDiv.innerHTML = "Dispositif de traduction en temps réel";
-                    subscriptionKeyElement.value = "";
+                    captionsDiv.innerHTML = "Real-time translator";
                     recordingButton.classList.toggle("blink")
                     //languageBar.style.visibility  = "visible";
+                    passwordBox.style.visibility = "visible";
                     rangeSlider.style.visibility  = "visible";
                     colorSlider.style.visibility  = "visible";
                     subscriptionKeyElement.style.visibility  = "visible";

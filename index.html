@@ -14,12 +14,18 @@
 <body>
     <div id="app-container">
         <div id="captions-container">
-            Dispositif de traduction en temps réel
+            Real-time translator
         </div>
         <div class="subscription-panel">
-            <tr>
-                <input id="key" type="text" pattern="[0-9a-zA-Z]" placeholder="Clé de souscription" style= "background:#ffffff6f;border: none; color: #ffff; border-radius:4px; max-width: 90%;">
-            </tr>
+            <!--style= "background:#ffffff6f;border: none; color: #ffff; border-radius:4px; max-width: 90%;"-->
+            <!-- An element to toggle between password visibility -->
+            <div class="password_box">
+                <input id="key" type="password" pattern="[0-9a-zA-Z]" placeholder="Subscription key" style= "background:#ffffff6f;border: none; color: #ffff; border-radius:4px; max-width: 90%;">
+                <div id="showpassword_box">
+                    <input type="checkbox" id="show">
+                    <p>Show password</p>
+                </div>  
+            </div>
             <!--- add a range to modify captions font size
             -->
             <div id="range-slider">
@@ -30,6 +36,9 @@
                 <span id="range-value">Color</span>
                 <input class="range-slider__range" id="color-font" type="range" value="100" min="0" max="360" step="1"> 
             </div>
+            <button class="reset_box" type="button">
+                <p>Reset</p>
+            </button> 
                 
         </div>
             <div class="subscription-region">
@@ -45,26 +54,26 @@
         <div class="language-bar">
              <div class="language-label">
                 <select id="from-language"; style= "background:#ffffff6f;border: none; color: #ffff; border-radius:4px; max-width: 90%;">
-                    <option value="fr-FR" selected disabled>Langue de départ</option>
-                    <option value="en">Anglais</option>
-                    <option value="fr-FR">Français</option>
-                    <option value="es">Espagnol</option>
-                    <option value="de">Allemand</option>
-                    <option value="el">Grec</option>
-                    <option value="ja">Japonais</option>
-                    <option value="ar">Arabe</option>
+                    <option value="fr-FR" selected disabled>Source Language</option>
+                    <option value="en-US">English</option>
+                    <option value="fr-FR">French (Default)</option>
+                    <option value="es">Spanish</option>
+                    <option value="de">German</option>
+                    <option value="el">Greek</option>
+                    <option value="ja">Japanese</option>
+                    <option value="ar">Arabic</option>
                 </select>
             </div>
-            <div class="language-label" hidden>
+            <div class="language-label">
                 <select id="to-language"; style= "background:#ffffff6f;border: none; color: #ffff; border-radius:4px; max-width: 90%;">
-                    <option value="en" selected disabled>Langue d'arrivée </option>
-                    <option value="en">Anglais</option>
-                    <option value="fr-FR">Français</option>
-                    <option value="es">Espagnol</option>
-                    <option value="de">Allemand</option>
-                    <option value="el">Grec</option>
-                    <option value="ja">Japonais</option>
-                    <option value="ar">Arabe</option>
+                    <option value="en" selected disabled>Target Language</option>
+                    <option value="en">English (Default)</option>
+                    <option value="fr-FR">French</option>
+                    <option value="es">Spanish</option>
+                    <option value="de">German</option>
+                    <option value="el">Greek</option>
+                    <option value="ja">Japanese</option>
+                    <option value="ar">Arabic</option>
                 </select>  
             </div>
             
