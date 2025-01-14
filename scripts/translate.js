@@ -195,9 +195,10 @@ document.addEventListener("DOMContentLoaded", function () {
                 } else {
                     translator.stop({captions: captionsDiv});
                     // Reset the language and region to the default value
-                    sourceLanguageBar.value = sourceLanguageBar.defaultValue;  // Reset to default source language
-                    targetLanguageBar.value = targetLanguageBar.defaultValue;  // Reset to default target language
-                    regionBar.value = regionBar.defaultValue;
+                    
+                    sourceLanguageBar.selectedIndex = 0  // Reset to default source language
+                    targetLanguageBar.selectedIndex = 0; // Reset to default target language
+                    regionBar.selectedIndex = 0; // Reset to default region
                     recordingButton.classList.toggle("blink")
                     //languageBar.style.visibility  = "visible";
                     regionBar.style.visibility = "visible";
