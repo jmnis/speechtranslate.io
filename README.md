@@ -8,7 +8,7 @@ CTRL + F: Enter full screen
 
 Esc: Exit full screen
 
-To access, visit: https://jmnis.github.io/adni.io/
+To access, visit: https://jmnis.github.io/speechtranslate.io/
 
 # How to Create a Speech Service on Azure and Generate a Subscription Key
 
