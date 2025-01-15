@@ -5,7 +5,7 @@ class Translator {
     _phrases = []
     start(options) {
         this._hasAlreadyStarted = true
-
+        
         const speechConfig = SpeechSDK.SpeechTranslationConfig.fromSubscription(options.key, options.region);
         speechConfig.speechRecognitionLanguage = options.fromLanguage;
         speechConfig.setProfanity(SpeechSDK.ProfanityOption.Raw);
@@ -28,11 +28,11 @@ class Translator {
             .catch(err => console.error(err));
 
         this._translationRecognizer.startContinuousRecognitionAsync();
-
         this._translationRecognizer.recognizing = this._translationRecognizer.recognized = recognizerCallback.bind(this)
         
         function recognizerCallback(s, e) {
             if (e.result.text) {
+                console.log(e.result.text);
                 options.captions.innerHTML = e.result.translations.get(options.toLanguage);
                 scrollToBottom(options.captions);
             } else {
