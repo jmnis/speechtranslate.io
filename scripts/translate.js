@@ -32,7 +32,6 @@ class Translator {
         
         function recognizerCallback(s, e) {
             if (e.result.text) {
-                console.log(e.result.text);
                 options.captions.innerHTML = e.result.translations.get(options.toLanguage);
                 scrollToBottom(options.captions);
             } else {
