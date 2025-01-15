@@ -4,7 +4,6 @@ class Translator {
     _hasAlreadyStarted = false
     _phrases = []
     start(options) {
-        console.log("Started")
         this._hasAlreadyStarted = true
 
         const speechConfig = SpeechSDK.SpeechTranslationConfig.fromSubscription(options.key, options.region);
@@ -40,12 +39,10 @@ class Translator {
                 options.captions.innerHTML = "";
             }
         }
-        console.log(this._hasAlreadyStarted)
        
     }
 
     stop(options) {
-        console.log("Ended")
         this._hasAlreadyStarted = false
         this._translationRecognizer.stopContinuousRecognitionAsync(
             stopRecognizer.bind(this),
@@ -123,7 +120,6 @@ document.addEventListener("DOMContentLoaded", function () {
     targetLanguageBar.addEventListener("change", (event) => {
         targetLanguage = event.target.value;
         if (translator._hasAlreadyStarted){
-            console.log("Changed")
             translator.stop()
             setTimeout(() => {
                 translator.start({
@@ -171,8 +167,6 @@ document.addEventListener("DOMContentLoaded", function () {
                 return;
             } else {
                 if (!translator._hasAlreadyStarted) {
-                    console.log("Concurency issue")
-                    console.log(serviceRegion)
                     subscriptionKeyElement.value = "";
                     captionsDiv.innerHTML = "";
                     //languageBar.style.visibility = "hidden";
