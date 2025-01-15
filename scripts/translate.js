@@ -176,7 +176,7 @@ document.addEventListener("DOMContentLoaded", function () {
                     subscriptionKeyElement.style.visibility = "hidden";
                     rangeSlider.style.visibility = "hidden";
                     colorSlider.style.visibility = "hidden";
-                    recordingButton.classList.toggle("blink")
+                    recordingButton.classList.add("blink")
 
                     // Update the language from which we translate
                     translator.start({
@@ -189,7 +189,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 } else {
                     translator.stop({captions: captionsDiv});
                     // Reset the language and region to the default value
-                    
+                    recordingButton.classList.remove("blink")
                     sourceLanguageBar.selectedIndex = 0  // Reset to default source language
                     targetLanguageBar.selectedIndex = 0; // Reset to default target language
                     regionBar.selectedIndex = 0; // Reset to default region
