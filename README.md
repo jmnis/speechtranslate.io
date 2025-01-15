@@ -1,5 +1,5 @@
 # SpeechTranslate
-SpeechTranslate provides a real-time translation engine powered by azure engine speech. You will need a valid Microsoft Azure Subscription Key related to a Speech Service ressource. You can find details about how to create a Speech Service ressource and to generate a Microsoft Azure Subscription Key.
+SpeechTranslate provides a real-time translation engine powered by azure engine speech. You will need a valid Microsoft Azure Subscription Key related to a Speech Service ressource. You can find details about how to create a Speech Service ressource and to generate a Microsoft Azure Subscription Key. This application was created for a French theatre company who needed a way to provide English subtitles in real time during their shows. With this app, the translation happens instantly, offering an immersive experience for both French-speaking and English-speaking audiences.
 
 # Commands
 CTRL + R: Start/Stop recording
