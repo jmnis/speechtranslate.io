@@ -52,4 +52,4 @@ Once the Speech service resource is created:
 3. Here, you'll find two subscription keys (Key 1 and Key 2) and the **Endpoint URL**. Copy either of the keys (usually Key 1) and the endpoint URL.
 
 # Demo
-[Click here to watch the demo video](https://github.com/jmnis/speechtranslate.io/blob/main/demo/demo.mov)
+[Click here to watch the demo video](https://youtu.be/S3CQSuZxONk)
