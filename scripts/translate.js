@@ -199,7 +199,6 @@ document.addEventListener("DOMContentLoaded", function () {
                     sourceLanguageBar.selectedIndex = 0  // Reset to default source language
                     targetLanguageBar.selectedIndex = 0; // Reset to default target language
                     regionBar.selectedIndex = 0; // Reset to default region
-                    recordingButton.classList.toggle("blink")
                     //languageBar.style.visibility  = "visible";
                     regionBar.style.visibility = "visible";
                     resetButton.style.visibility = "visible";
