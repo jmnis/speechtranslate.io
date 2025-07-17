@@ -4,44 +4,94 @@ class Translator {
     _hasAlreadyStarted = false
     _phrases = []
     start(options) {
+        console.log("Starting real-time translation...");
+        console.log(`From: ${options.fromLanguage}, To: ${options.toLanguage}`);
         this._hasAlreadyStarted = true
         
         const speechConfig = SpeechSDK.SpeechTranslationConfig.fromSubscription(options.key, options.region);
+        console.log(speechConfig);
         speechConfig.speechRecognitionLanguage = options.fromLanguage;
         speechConfig.setProfanity(SpeechSDK.ProfanityOption.Raw);
         speechConfig.setProperty(SpeechSDK.PropertyId.SpeechServiceConnection_EndSilenceTimeoutMs, "2500")
         speechConfig.addTargetLanguage(options.toLanguage);
         const audioConfig = SpeechSDK.AudioConfig.fromDefaultMicrophoneInput();
+        console.log(audioConfig);
+
         this._translationRecognizer = new SpeechSDK.TranslationRecognizer(speechConfig, audioConfig);
-        const phraseList = SpeechSDK.PhraseListGrammar.fromRecognizer(this._translationRecognizer);
-        // read the phrases from the file phrases.txt and add them to the phraseList
-        fetch("/scripts/phrases.txt")
-            .then(response => response.text())
-            .then(text => {
-                this._phrases = text.split("\n");
-                this._phrases = this._phrases.filter(phrase => phrase !== "");
-                this._phrases.forEach(phrase => {
-                    if (phrase === "") return;
-                    phraseList.addPhrase(phrase);
-                });
-            })
-            .catch(err => console.error(err));
+        console.log(this._translationRecognizer);
+        // const phraseList = SpeechSDK.PhraseListGrammar.fromRecognizer(this._translationRecognizer);
+        // //read the phrases from the file phrases.txt and add them to the phraseList
+        // fetch("/scripts/phrases.txt")
+        //     .then(response => response.text())
+        //     .then(text => {
+        //         this._phrases = text.split("\n");
+        //         this._phrases = this._phrases.filter(phrase => phrase !== "");
+        //         this._phrases.forEach(phrase => {
+        //             if (phrase === "") return;
+        //             phraseList.addPhrase(phrase);
+        //         });
+        //     })
+        //     .catch(err => console.error(err));
+        // 55gyUAhznfhmgOiOwEmOKSLl3X1prLgITpsUPDWMknkfpUIkKX46JQQJ99BGAC5RqLJXJ3w3AAAYACOGdnyP
 
         this._translationRecognizer.startContinuousRecognitionAsync();
+        console.log("Real-time translation started.");
         this._translationRecognizer.recognizing = this._translationRecognizer.recognized = recognizerCallback.bind(this)
+        console.log("Recognizing and recognized events set.");
         
+        /*To keep */
         function recognizerCallback(s, e) {
+            console.log(`Recognizing: ${e.result.text}`);
             if (e.result.text) {
                 options.captions.innerHTML = e.result.translations.get(options.toLanguage);
+                console.log(`Recognized: ${e.result.text}`);
+                console.log(`Translated: ${e.result.translations.get(options.toLanguage)}`);
                 scrollToBottom(options.captions);
             } else {
+                console.log(`No text recognized.`);
                 options.captions.innerHTML = "";
             }
         }
+
+        /* TO KEEP */
+        // this._translationRecognizer.recognizing = this._translationRecognizer.recognized = recognizerCallback.bind(this)
+
+        // this._translationRecognizer.recognizing = (s, e) => {
+        //     console.log(`Recognizing: ${e.result.translations}`);
+        // };
+        
+        // this._translationRecognizer.recognized = (s, e) => {
+        //     console.log(`Recognized: ${e.result.txt}`);
+        // };
+        
+        // this._translationRecognizer.canceled = (s, e) => {
+        //     console.log(`Canceled: ${e.errorDetails}`);
+        // };
+        
+        // this._translationRecognizer.stopped = (s, e) => {
+        //     console.log(`Stopped: ${e.reason}`);
+        // };
+        
+        // function recognizerCallback(s, e) {
+        //     //console.log(`Recognizing: ${e.result.text}`);
+        //     console.log(`Recognizing: ${e}`);
+        //     if (e.result.text) {
+        //         console.log(`Recognized: ${e}`);
+        //         // Check if the translation is available
+        //         //options.captions.innerHTML = e.result.translations.get(options.toLanguage);
+        //         console.log(`Recognized: ${e.result.text}`);
+        //         //console.log(`Translated: ${e.result.translations.get(options.toLanguage)}`);
+        //         scrollToBottom(options.captions);
+        //     } else {
+        //         console.log(`No text recognized.`);
+        //         options.captions.innerHTML = "";
+        //     }
+        // }
        
     }
 
     stop(options) {
+        console.log("Stopping real-time translation...");
         this._hasAlreadyStarted = false
         this._translationRecognizer.stopContinuousRecognitionAsync(
             stopRecognizer.bind(this),
@@ -166,9 +216,10 @@ document.addEventListener("DOMContentLoaded", function () {
                 return;
             } else {
                 if (!translator._hasAlreadyStarted) {
+                    // Start the translation
                     subscriptionKeyElement.value = "";
                     captionsDiv.innerHTML = "";
-                    //languageBar.style.visibility = "hidden";
+                    languageBar.style.visibility = "hidden";
                     regionBar.style.visibility = "hidden";
                     resetButton.style.visibility = "hidden";
                     passwordBox.style.visibility = "hidden";
@@ -192,7 +243,7 @@ document.addEventListener("DOMContentLoaded", function () {
                     sourceLanguageBar.selectedIndex = 0  // Reset to default source language
                     targetLanguageBar.selectedIndex = 0; // Reset to default target language
                     regionBar.selectedIndex = 0; // Reset to default region
-                    //languageBar.style.visibility  = "visible";
+                    languageBar.style.visibility  = "visible";
                     regionBar.style.visibility = "visible";
                     resetButton.style.visibility = "visible";
                     passwordBox.style.visibility = "visible";
