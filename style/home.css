@@ -11,10 +11,7 @@ html, body{
     overflow: hidden !important;
     background-color: #000;
 }
-/* Phrases */
-#phrases{
-    visibility: hidden;
-}
+
 /* App container */
 #app-container{
     position: relative;
@@ -49,7 +46,7 @@ html, body{
 }*/
 #captions-container {
     position: absolute;
-    top: 30%;
+    top: 50%;
     left: 50%;
     transform: translate(-50% , -50%);
     scroll-padding-top: 150px;

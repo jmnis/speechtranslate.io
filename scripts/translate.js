@@ -14,18 +14,6 @@ class Translator {
         const audioConfig = SpeechSDK.AudioConfig.fromDefaultMicrophoneInput();
         this._translationRecognizer = new SpeechSDK.TranslationRecognizer(speechConfig, audioConfig);
         const phraseList = SpeechSDK.PhraseListGrammar.fromRecognizer(this._translationRecognizer);
-        // read the phrases from the file phrases.txt and add them to the phraseList
-        fetch("/scripts/phrases.txt")
-            .then(response => response.text())
-            .then(text => {
-                this._phrases = text.split("\n");
-                this._phrases = this._phrases.filter(phrase => phrase !== "");
-                this._phrases.forEach(phrase => {
-                    if (phrase === "") return;
-                    phraseList.addPhrase(phrase);
-                });
-            })
-            .catch(err => console.error(err));
 
         this._translationRecognizer.startContinuousRecognitionAsync();
         this._translationRecognizer.recognizing = this._translationRecognizer.recognized = recognizerCallback.bind(this)
