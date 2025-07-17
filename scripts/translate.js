@@ -168,7 +168,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 if (!translator._hasAlreadyStarted) {
                     subscriptionKeyElement.value = "";
                     captionsDiv.innerHTML = "";
-                    //languageBar.style.visibility = "hidden";
+                    languageBar.style.visibility = "hidden";
                     regionBar.style.visibility = "hidden";
                     resetButton.style.visibility = "hidden";
                     passwordBox.style.visibility = "hidden";
@@ -192,7 +192,7 @@ document.addEventListener("DOMContentLoaded", function () {
                     sourceLanguageBar.selectedIndex = 0  // Reset to default source language
                     targetLanguageBar.selectedIndex = 0; // Reset to default target language
                     regionBar.selectedIndex = 0; // Reset to default region
-                    //languageBar.style.visibility  = "visible";
+                    languageBar.style.visibility  = "visible";
                     regionBar.style.visibility = "visible";
                     resetButton.style.visibility = "visible";
                     passwordBox.style.visibility = "visible";
