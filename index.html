@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <link rel="stylesheet" href="style/home.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <script src="scripts/microsoft.cognitiveservices.speech.sdk.bundle.js"></script>   
+    <script src="https://aka.ms/csspeech/jsbrowserpackageraw"></script> 
     <!-- Speech SDK reference sdk. 
     <script src="https://cdn.jsdelivr.net/npm/microsoft-cognitiveservices-speech-sdk@latest"></script>-->
     <script src="scripts/translate.js"></script>
@@ -46,35 +46,35 @@
              <div class="language-label">
                 <select id="from-language"; style= "background:#ffffff6f;border: none; color: #ffff; border-radius:4px; max-width: 90%;">
                     <option value="" selected >Source Language</option>
-                    <option value="ar">Arabic</option>
-                    <option value="en">English</option>
-                    <option value="fr">French</option>
-                    <option value="de">German</option>
-                    <option value="el">Greek</option>
-                    <option value="it">Italian</option>
-                    <option value="ja">Japanese</option>
-                    <option value="pt">Portuguese (Portugal)</option>
-                    <option value="es">Spanish</option>
+                    <option value="ar-SA">Arabic (Saudi Arabia)</option>
+                    <option value="en-US">English (United States)</option>
+                    <option value="fr-FR">French (France)</option>
+                    <option value="de-DE">German (Germany)</option>
+                    <option value="el-GR">Greek (Greece)</option>
+                    <option value="it-IT">Italian (Italy)</option>
+                    <option value="ja-JP">Japanese (Japan)</option>
+                    <option value="pt-PT">Portuguese (Portugal)</option>
+                    <option value="es-ES">Spanish (Spain)</option>
                 </select>
             </div>
             <div class="language-label">
                 <select id="to-language"; style= "background:#ffffff6f;border: none; color: #ffff; border-radius:4px; max-width: 90%;">
                     <option value="" selected >Target Language</option>
-                    <option value="ar">Arabic</option>
-                    <option value="en">English</option>
-                    <option value="fr">French</option>
-                    <option value="de">German</option>
-                    <option value="el">Greek</option>
-                    <option value="it">Italian</option>
-                    <option value="ja">Japanese</option>
-                    <option value="pt">Portuguese (Portugal)</option>
-                    <option value="es">Spanish</option>
+                    <option value="ar-SA">Arabic (Saudi Arabia)</option>
+                    <option value="en-US">English (United States)</option>
+                    <option value="fr-FR">French (France)</option>
+                    <option value="de-DE">German (Germany)</option>
+                    <option value="el-GR">Greek (Greece)</option>
+                    <option value="it-IT">Italian (Italy)</option>
+                    <option value="ja-JP">Japanese (Japan)</option>
+                    <option value="pt-PT">Portuguese (Portugal)</option>
+                    <option value="es-ES">Spanish (Spain)</option>
                 </select>  
             </div>
 
             <div class="subscription-region">
-                <select id="region"; style= "background:#ffffff6f;border: none; color: #ffff; border-radius:4px; max-width: 90%;">
-                    <option value="" selected>Region</option>
+                <select id="region"; style= "background:#ffffff6f;border: none; color: #ffff; border-radius:4px; max-width: 90%;" hidden>
+                    <option value="westeurope" selected>Region</option>
                     <option value="eastus">eastus</option>
                     <option value="southeastasia">southeastasia</option>
                     <option value="westeurope">westeurope</option>
